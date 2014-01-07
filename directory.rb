@@ -1,3 +1,4 @@
+# first print the list of students.
 puts "The students of my cohort at Makers Academy"
 puts "-----------------------"
 puts "Peter Saxton"
@@ -16,6 +17,8 @@ puts "James Hunter"
 puts "Rolando Barbella"
 puts "Megan Folsom"
 puts "Berta Gutierrez"
+# At the end we print the total number of students
 print "Overall, we have"
-print "16 "
-puts "great students."
+# print doesn't add new line characters, but puts does! 
+print 16
+puts " great students."
