@@ -30,7 +30,7 @@ def print(students)
 	end
 end
 
-def print_footer(names)
+def print_footer(students)
 	puts "Overall, we have #{students.length} great students" 
 end
 
