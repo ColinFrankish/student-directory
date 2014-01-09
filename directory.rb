@@ -26,12 +26,23 @@ def print_header
 	puts "-----------------"
 end
 
-def print_students(students)
-	students.each_with_index do |student, x|
+def list(selection)
+		selection.each_with_index do |student, x|
 		print x + 1
-		puts "  #{student[:name]} (#{student[:cohort]} cohort)"
+		puts "  #{student[:name]} (#{student[:cohort]} cohort)"	
 	end
 end
+
+def print_students(students)
+	list(students)
+end
+
+def students_beginning_with(students) #rename method
+	puts "Choose letter:"
+	letter = gets.chomp
+	selected_students = students.select { |student| student[:name].chars.first == letter }
+	list(selected_students)
+ end
 
 def print_footer(students)
 	puts "Overall, we have #{students.length} great students" 
@@ -42,4 +53,5 @@ students = input_students
 print_header
 print_students(students)	
 print_footer(students)
+students_beginning_with(students)
 
