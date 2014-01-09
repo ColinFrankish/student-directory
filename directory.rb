@@ -26,9 +26,10 @@ def print_header
 	puts "-----------------"
 end
 
-def print(students)
-	students.each do |student|
-		puts "#{student[:name]} (#{student[:cohort]} cohort)"
+def print_students(students)
+	students.each_with_index do |student, x|
+		print x + 1
+		puts "  #{student[:name]} (#{student[:cohort]} cohort)"
 	end
 end
 
@@ -39,6 +40,6 @@ end
 # nothing happens till we call the methods
 students = input_students
 print_header
-print(students)	
+print_students(students)	
 print_footer(students)
 
