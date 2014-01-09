@@ -37,7 +37,7 @@ def print_students(students)
 	list(students)
 end
 
-def students_beginning_with(students) #rename method
+def first_letter_filter(students) #rename method
 	puts "Choose letter:"
 	letter = gets.chomp
 	selected_students = students.select { |student| student[:name].chars.first == letter }
@@ -53,5 +53,5 @@ students = input_students
 print_header
 print_students(students)	
 print_footer(students)
-students_beginning_with(students)
+first_letter_filter(students)
 
