@@ -37,12 +37,19 @@ def print_students(students)
 	list(students)
 end
 
-def first_letter_filter(students) #rename method
+def first_letter_filter(students) 
 	puts "Choose letter:"
 	letter = gets.chomp
 	selected_students = students.select { |student| student[:name].chars.first == letter }
 	list(selected_students)
- end
+end
+
+ def namelength(students)
+ 		puts "Choose maximum name length in characters:"
+ 		size = gets.chomp.to_i
+ 		selected_students = students.select { |student| student[:name].length <= size}
+ 		list(selected_students)
+end
 
 def print_footer(students)
 	puts "Overall, we have #{students.length} great students" 
@@ -54,4 +61,4 @@ print_header
 print_students(students)	
 print_footer(students)
 first_letter_filter(students)
-
+namelength(students)
