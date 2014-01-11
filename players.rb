@@ -2,14 +2,12 @@
 
 
 def input_players
-puts "please enter the name of a player."
-	name = gets.chomp
-players = []
-	
-	
+	players = []
 	count = 1
-	until count > 4
-		puts "And another please!"
+	until count > 5
+		puts "please enter the first name of a player."
+		name = gets.chomp
+		puts "And the surname please!"
 		name = gets.chomp
 		players << {:name => name}
 		count += 1
