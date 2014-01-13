@@ -2,22 +2,29 @@
 # getting user input for students
 
 def input_students
-	puts "Please enter the names of the students"
+	puts "Please enter the name of each student "
+	puts "followed by their cohort."
 	puts "to finish just hit return twice"
 # Create an empty array
 	students = []
+	
 # Get the first name 
 	name = gets.chomp
+	cohort = gets.chomp
+  
 # While the name is not empty, repeat this code.
-	while  !name.empty? do
+	while  !name.empty? && !cohort.empty? do
 		# add the student hash to the array
-		students << {:name => name, :cohort => :january}
+		students << {:name => name, :cohort => cohort}
 		puts "Now we have #{students.length} students"
 		# Get another name from the user
 		name = gets.chomp
+		cohort = gets.chomp
 	end
+# end
 	# Return array for students
 	students
+	
 end
 
  
@@ -27,7 +34,7 @@ def print_header
 end
 
 def list(selection)
-		selection.each_with_index do |student, x|
+	selection.each_with_index do |student, x|
 		print x + 1
 		puts "  #{student[:name]} (#{student[:cohort]} cohort)"	
 	end
@@ -44,11 +51,11 @@ def first_letter_filter(students)
 	list(selected_students)
 end
 
- def namelength(students)
- 		puts "Choose maximum name length in characters:"
- 		size = gets.chomp.to_i
- 		selected_students = students.select { |student| student[:name].length <= size}
- 		list(selected_students)
+def namelength(students)
+ 	puts "Choose maximum name length in characters:"
+ 	size = gets.chomp.to_i
+ 	selected_students = students.select { |student| student[:name].length <= size}
+ 	list(selected_students)
 end
 
 def print_footer(students)
