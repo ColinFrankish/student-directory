@@ -2,9 +2,9 @@
 # Get unput for students, name, cohort, country of birth
 
 def input_students
-	puts "Please enter the name of each student ".center(77)
-	puts "followed by their cohort and country of birth.".center(77)
-	puts "to finish just hit return three times".center(77)
+	puts "Please enter the name of each student, ".center(77)
+	puts "followed by their cohort and country of birth,".center(77)
+	puts "and optional details as prompted.".center(77)
 # Create an empty array
 	students = []
 	
@@ -13,15 +13,17 @@ def input_students
 	print "name please: "; name = removenewline(gets)
 	print "cohort month please: "; cohort = gets.chomp
   print "country of birth please: "; birth = gets.chomp
+  print "favourite hobby (Opt.): "; hobby = gets.chomp
 # While the name is not empty, repeat this code.
 # 
 	while  !name.empty?  do
     #set default months for cohort and birth if nothing is entered
 	  cohort = "January" if cohort.empty?
     birth = "U.K." if birth.empty?
+    hobby = "N/A" if hobby.empty?
     # add the student  info hash to the array
 
-		students << {:name => name, :cohort => cohort, :birth => birth}
+		students << {:name => name, :cohort => cohort, :birth => birth, :hobby => hobby}
   if students.length == 1
     puts " We have only one student!"
   else
@@ -31,6 +33,7 @@ def input_students
 		print "name please: "; name = removenewline(gets)
     print "cohort month please: "; cohort = gets.chomp
     print "country of birth please: "; birth = gets.chomp
+    print "favourite hobby (Opt.): "; hobby = gets.chomp
 	end
 
 	# Return array for students
@@ -51,7 +54,7 @@ end
 def list(selection)
 	selection.each_with_index do |student, x|
 		print x + 1
-		puts "  #{student[:name].center(30)} " + "(#{student[:cohort]} cohort)".center(25) + " #{student[:birth].center(20)}"	
+		puts "  #{student[:name].center(30)} " + "(#{student[:cohort]} cohort)".center(25) + " #{student[:birth].center(20)}" + " #{student[:hobby].center(25)}"
 	end
 end
 
@@ -61,7 +64,7 @@ def print_students(students)
 end
 # add filter to select only students starting with certain character.
 def first_letter_filter(students) 
-	puts "Choose letter:"
+	puts "Choose first letter of student name to filter:"
 	letter = gets.chomp
 	selected_students = students.select { |student| student[:name].chars.first == letter }
 	list(selected_students)
