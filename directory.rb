@@ -3,23 +3,24 @@
 
 def input_students
 	puts "Please enter the name of each student "
-	puts "followed by their cohort."
-	puts "to finish just hit return twice"
+	puts "followed by their cohort and country of birth."
+	puts "to finish just hit return three times"
 # Create an empty array
 	students = []
 	
 # Get the first name 
 	name = gets.chomp
 	cohort = gets.chomp
-  
+  birth = gets.chomp
 # While the name is not empty, repeat this code.
-	while  !name.empty? && !cohort.empty? do
+	while  !name.empty? && !cohort.empty? && !birth.empty? do
 		# add the student hash to the array
-		students << {:name => name, :cohort => cohort}
+		students << {:name => name, :cohort => cohort, :birth => birth}
 		puts "Now we have #{students.length} students"
 		# Get another name from the user
 		name = gets.chomp
 		cohort = gets.chomp
+    birth = gets.chomp
 	end
 # end
 	# Return array for students
@@ -36,7 +37,7 @@ end
 def list(selection)
 	selection.each_with_index do |student, x|
 		print x + 1
-		puts "  #{student[:name]} (#{student[:cohort]} cohort)"	
+		puts "  #{student[:name]} (#{student[:cohort]} cohort #{student[:birth]})"	
 	end
 end
 
