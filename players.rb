@@ -26,9 +26,16 @@ end
 def print_team(players)
 		puts "Your team is"
 			players.each do |player|
-			print "Player #{player[:firstname]}, #{player[:lastname]}\n"
+			print "Player #{player[:firstname]}"
+			print" #{player[:lastname]}\n"
 	end
 		
+
+def Number_of_players(players)
+	puts "You have a team of #{players.length/2}"
+end
+
+
 end
 	
 def print_footer
@@ -40,5 +47,7 @@ def print_footer
 print_title
 players = input_players
 print_team(players)
+Number_of_players(players)
+print_footer
 
 
