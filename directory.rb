@@ -76,7 +76,11 @@ def cohortfilter(students)
 end
 
 def print_footer(students)
-	puts "Overall, we have #{students.length} great students" .center(77)
+  if students.length == 1
+    puts "We have one student".center(77)
+  else
+	   puts "Overall, we have #{students.length} great students" .center(77)
+  end
 end
 
 # nothing happens till we call the methods
