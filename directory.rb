@@ -1,6 +1,6 @@
 
 # Get unput for students, name, cohort, country of birth
-
+@students = []  # empty array that all methods can use.
 def input_students
 	puts "Please enter the name of each student, ".center(77)
 	puts "followed by their cohort and country of birth,".center(77)
@@ -101,27 +101,37 @@ def print_footer(students)
   end
 end
 
-def interactive_menu
-	students = []
-	loop do 
+
+def print_menu
 	puts "1. Input the students."
 	puts "2. Show the students."
-	puts "9. Exit."
-	selection = gets.chomp
+	puts "9. Exit." 
+end
 
+def show_students
+	print_header
+	print_students_list
+	print_footer
+end
+
+def process(selection)
 	case selection
 	when "1"
-		students = input_students
+	input_students
 	when "2"
-		print_header
-		print(students)
-		print_footer
+	show_students
 	when "9"
-		exit
+	exit
 	else
-		puts " I don't know what you meant, please try again."
+	puts "I don't know what you mean,try again"
 	end
 end
+
+def interactive_menu
+	loop do 
+		print_menu
+		process(gets.chomp)
+	end
 end
 
 
@@ -134,3 +144,17 @@ print_footer(students)
 first_letter_filter(students)
 namelength(students)
 cohortfilter(students)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
