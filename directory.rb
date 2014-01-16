@@ -75,18 +75,18 @@ end
 def namelength(students)
  	puts "Choose maximum name length in characters:"
  	size = gets.chomp.to_i
- 	selected_students = students.select { |student| student[:name].length <= size}
+ 	selected_students = @students.select { |student| student[:name].length <= size}
  	list(selected_students)
 end
 
 # filter by cohort using .map  .uniq and then print selected list
-def cohortfilter(students)
+def cohortfilter
   puts "Please find students by cohort below:"
-  cohort_months = students.map { |month| month[:cohort]}
+  cohort_months = @students.map { |month| month[:cohort]}
   cohort_months.uniq!
   cohort_months.each do |month|
     puts "Here are the #{month} students"
-    selected_students = students.select { |student| student[:cohort] == month}
+    selected_students = @students.select { |student| student[:cohort] == month}
     list(selected_students)
   end
 end
@@ -107,6 +107,7 @@ def print_menu
 	puts "2. Show the students."
 	puts "3. Save the list to students.csv"
 	puts "4. Load students list from students.csv."
+	puts "5. Filter students by cohort (default January)"
 	puts "9. Exit." 
 end
 
@@ -126,6 +127,8 @@ def process(selection)
 	save_students
 	when "4"
 	load_students
+	when "5"
+	cohortfilter
 	when "9"
 	exit
 	else
