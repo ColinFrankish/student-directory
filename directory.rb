@@ -10,10 +10,10 @@ def input_students
 	
   #get the info - first line is using method removenewline defined below
   #instead of using chomp
-	print "name please: "; name = removenewline(gets)
-	print "cohort month please: "; cohort = gets.chomp
-  print "country of birth please: "; birth = gets.chomp
-  print "favourite hobby (Opt.): "; hobby = gets.chomp
+	print "name please: "; name = STDIN.gets.chomp
+	print "cohort month please: "; cohort = STDIN.gets.chomp
+  print "country of birth please: "; birth = STDIN.gets.chomp
+  print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
 # While the name is not empty, repeat this code.
 # 
 	while  !name.empty?  do
@@ -30,19 +30,19 @@ def input_students
 		puts "Now we have #{@students.length} students"
   end
 		# Get another set of details from the user. 
-		print "name please: "; name = removenewline(gets)
-    print "cohort month please: "; cohort = gets.chomp
-    print "country of birth please: "; birth = gets.chomp
-    print "favourite hobby (Opt.): "; hobby = gets.chomp
+		print "name please: "; name = STDIN.gets.chomp
+    print "cohort month please: "; cohort = STDIN.gets.chomp
+    print "country of birth please: "; birth = STDIN.gets.chomp
+    print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
 	end
 
 	# Return array for students
 	@students
 end
 
-def removenewline(string)
-    string.slice(0...-1) if string.end_with?("\n")
-end
+#def removenewline(string)
+ #   string.slice(0...-1) if string.end_with?("\n")
+#end
  
  # print the header and and use .center method. 
 def print_header
@@ -54,7 +54,7 @@ end
 def list(selection)
 	selection.each_with_index do |student, x|
 		print x + 1
-		puts "  #{student[:name].center(30)} " + "(#{student[:cohort]} cohort)".center(25) + " #{student[:birth].center(20)}" + " #{student[:hobby].center(25)}"
+		puts "  #{student[:name].center(30)} " + " #{student[:cohort].center(25)}" + " #{student[:birth].center(20)}" + " #{student[:hobby].center(25)}"
 	end
 end
 
@@ -136,7 +136,7 @@ end
 def interactive_menu
 	loop do 
 		print_menu
-		process(gets.chomp)
+		process(STDIN.gets.chomp)
 	end
 end
 
@@ -152,11 +152,24 @@ def save_students
 	file.close
 end
 
-def load_students
-	file = File.open("students.csv", "r")
+def try_load_students
+	filename = ARGV.first
+	return if filename.nil?
+	if filename.exists?
+	load_students(filename)
+	puts " We loaded #{@students.length} from the #{filename}."
+	else
+		puts "Sorry, doesnt exist.."
+	exit
+end
+end
+
+def load_students(filename = "students.csv")
+
+	file = File.open(filename, "r")
 	file.readlines.each do |line|
 		name, cohort, birth, hobby = line.chomp.split(',')
-		@students << {:name => name, :cohort => cohort.to_sym, :birth => birth.to_sym, :hobby => hobby.to_sym}
+		@students << {:name => name, :cohort => cohort, :birth => birth, :hobby => hobby}
 	end
 	file.close
 end
