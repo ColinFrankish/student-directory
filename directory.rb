@@ -6,7 +6,7 @@ def input_students
 	puts "followed by their cohort and country of birth,".center(77)
 	puts "and optional details as prompted.".center(77)
 # Create an empty array
-	students = []
+	# students = []
 	
   #get the info - first line is using method removenewline defined below
   #instead of using chomp
@@ -18,16 +18,16 @@ def input_students
 # 
 	while  !name.empty?  do
     #set default months for cohort and birth if nothing is entered
-	  cohort = "January" if cohort.empty?
+	cohort = "January" if cohort.empty?
     birth = "U.K." if birth.empty?
     hobby = "N/A" if hobby.empty?
     # add the student  info hash to the array
 
-		students << {:name => name, :cohort => cohort, :birth => birth, :hobby => hobby}
-  if students.length == 1
+		@students << {:name => name, :cohort => cohort, :birth => birth, :hobby => hobby}
+  if @students.length == 1
     puts " We have only one student!"
   else
-		puts "Now we have #{students.length} students"
+		puts "Now we have #{@students.length} students"
   end
 		# Get another set of details from the user. 
 		print "name please: "; name = removenewline(gets)
@@ -37,7 +37,7 @@ def input_students
 	end
 
 	# Return array for students
-	students
+	@students
 end
 
 def removenewline(string)
@@ -60,7 +60,7 @@ end
 
 #defing method to print all students
 def print_students(students)
-	list(students)
+	list(@students)
 end
 # add filter to select only students starting with certain character.
 def first_letter_filter(students) 
@@ -93,11 +93,11 @@ end
 
 
 # footer added with if statement to avoid contradictions
-def print_footer(students)
-  if students.length == 1
+def print_footer
+  if @students.length == 1
     puts "We have one student".center(77)
   else
-	   puts "Overall, we have #{students.length} great students" .center(77)
+	   puts "Overall, we have #{@students.length} great students" .center(77)
   end
 end
 
@@ -105,12 +105,13 @@ end
 def print_menu
 	puts "1. Input the students."
 	puts "2. Show the students."
+	puts "3. Save the list to students.csv"
 	puts "9. Exit." 
 end
 
 def show_students
 	print_header
-	print_students_list
+	print_students(@students)
 	print_footer
 end
 
@@ -120,6 +121,8 @@ def process(selection)
 	input_students
 	when "2"
 	show_students
+	when "3"
+	save_students
 	when "9"
 	exit
 	else
@@ -132,6 +135,18 @@ def interactive_menu
 		print_menu
 		process(gets.chomp)
 	end
+end
+
+def save_students
+	file = File.open("students.csv", "w")
+	
+	@students.each do |student|
+	student_data = [student[:name], student[:cohort], student[:birth], student [:hobby]]
+	puts student_data.inspect
+	csv_line = student_data.join(",")
+	file.puts csv_line
+	end
+	file.close
 end
 
 
