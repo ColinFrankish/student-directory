@@ -7,8 +7,8 @@ def input_students
 	puts "and optional details as prompted.".center(77)
 	print "name please: "; name = STDIN.gets.chomp
 	print "cohort month please: "; cohort = STDIN.gets.chomp
-  print "country of birth please: "; birth = STDIN.gets.chomp
-  print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
+  	print "country of birth please: "; birth = STDIN.gets.chomp
+  	print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
 # While the name is not empty, repeat this code.
 
 	while  !name.empty?  do
@@ -18,13 +18,13 @@ def input_students
     hobby = "N/A" if hobby.empty?
    # add the student  info hash to the array
 		@students << {:name => name, :cohort => cohort, :birth => birth, :hobby => hobby}
-  if @students.length == 1
+  	if @students.length == 1
     puts " We have only one student!"
-  else
-		puts "Now we have #{@students.length} students"
-  end
+  	else
+	puts "Now we have #{@students.length} students"
+  	end
 		# Get another set of details from the user. 
-		print "name please: "; name = STDIN.gets.chomp
+	print "name please: "; name = STDIN.gets.chomp
     print "cohort month please: "; cohort = STDIN.gets.chomp
     print "country of birth please: "; birth = STDIN.gets.chomp
     print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
