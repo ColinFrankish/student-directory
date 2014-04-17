@@ -5,37 +5,30 @@ def input_students
 	puts "Please enter the name of each student, ".center(77)
 	puts "followed by their cohort and country of birth,".center(77)
 	puts "and optional details as prompted.".center(77)
-# Create an empty array
-	# students = []
-	
-  #get the info - first line is using method removenewline defined below
-  #instead of using chomp
 	print "name please: "; name = STDIN.gets.chomp
 	print "cohort month please: "; cohort = STDIN.gets.chomp
-  print "country of birth please: "; birth = STDIN.gets.chomp
-  print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
+  	print "country of birth please: "; birth = STDIN.gets.chomp
+  	print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
 # While the name is not empty, repeat this code.
-# 
+
 	while  !name.empty?  do
     #set default months for cohort and birth if nothing is entered
 	cohort = "January" if cohort.empty?
     birth = "U.K." if birth.empty?
     hobby = "N/A" if hobby.empty?
-    # add the student  info hash to the array
-
+   # add the student  info hash to the array
 		@students << {:name => name, :cohort => cohort, :birth => birth, :hobby => hobby}
-  if @students.length == 1
+  	if @students.length == 1
     puts " We have only one student!"
-  else
-		puts "Now we have #{@students.length} students"
-  end
+  	else
+	puts "Now we have #{@students.length} students"
+  	end
 		# Get another set of details from the user. 
-		print "name please: "; name = STDIN.gets.chomp
+	print "name please: "; name = STDIN.gets.chomp
     print "cohort month please: "; cohort = STDIN.gets.chomp
     print "country of birth please: "; birth = STDIN.gets.chomp
     print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
 	end
-
 	# Return array for students
 	@students
 end
@@ -43,7 +36,6 @@ end
 #def removenewline(string)
  #   string.slice(0...-1) if string.end_with?("\n")
 #end
- 
  # print the header and and use .center method. 
 def print_header
 	puts "The students of my cohort at Makers Academy".center(77)
@@ -58,40 +50,36 @@ def list(selection)
 	end
 end
 
-#defing method to print all students
-def print_students(students)
+def print_students
 	list(@students)
 end
 # add filter to select only students starting with certain character.
-def first_letter_filter(students) 
+def first_letter_filter
 	puts "Choose first letter of student name to filter:"
 	letter = gets.chomp
-	selected_students = students.select { |student| student[:name].chars.first == letter }
+	selected_students = @students.select { |student| student[:name].chars.first == letter }
 	list(selected_students)
 end
 
 # add similar filter to get max name length - note the .to_i which converts
 #string (length) to integer
-def namelength(students)
+def namelength
  	puts "Choose maximum name length in characters:"
  	size = gets.chomp.to_i
- 	selected_students = students.select { |student| student[:name].length <= size}
+ 	selected_students = @students.select { |student| student[:name].length <= size}
  	list(selected_students)
 end
-
 # filter by cohort using .map  .uniq and then print selected list
-def cohortfilter(students)
+def cohortfilter
   puts "Please find students by cohort below:"
-  cohort_months = students.map { |month| month[:cohort]}
+  cohort_months = @students.map { |month| month[:cohort]}
   cohort_months.uniq!
   cohort_months.each do |month|
     puts "Here are the #{month} students"
-    selected_students = students.select { |student| student[:cohort] == month}
+    selected_students = @students.select { |student| student[:cohort] == month}
     list(selected_students)
   end
 end
-
-
 # footer added with if statement to avoid contradictions
 def print_footer
   if @students.length == 1
@@ -101,18 +89,20 @@ def print_footer
   end
 end
 
-
 def print_menu
 	puts "1. Input the students."
 	puts "2. Show the students."
 	puts "3. Save the list to students.csv"
 	puts "4. Load students list from students.csv."
+	puts "5. Filter students by cohort (default January)."
+	puts "6. Filter students by first letter of their name."
+	puts "7. Filter students by name length."
 	puts "9. Exit." 
 end
 
 def show_students
 	print_header
-	print_students(@students)
+	print_students
 	print_footer
 end
 
@@ -126,6 +116,12 @@ def process(selection)
 	save_students
 	when "4"
 	load_students
+	when "5"
+	cohortfilter
+	when "6"
+	first_letter_filter
+	when "7"
+	namelength
 	when "9"
 	exit
 	else
@@ -141,8 +137,7 @@ def interactive_menu
 end
 
 def save_students
-	file = File.open("students.csv", "w")
-	
+	file = File.open("students.csv", "w")	
 	@students.each do |student|
 	student_data = [student[:name], student[:cohort], student[:birth], student [:hobby]]
 	puts student_data.inspect
@@ -159,13 +154,12 @@ def try_load_students
 	load_students(filename)
 	puts " We loaded #{@students.length} from the #{filename}."
 	else
-		puts "Sorry, doesnt exist.."
+		puts "Sorry, doesn't exist.."
 	exit
 end
 end
 
 def load_students(filename = "students.csv")
-
 	file = File.open(filename, "r")
 	file.readlines.each do |line|
 		name, cohort, birth, hobby = line.chomp.split(',')
@@ -173,17 +167,16 @@ def load_students(filename = "students.csv")
 	end
 	file.close
 end
-
-
 # nothing happens till we call the methods
-interactive_menu
 #students = input_students
 print_header
-print_students(students)	
-print_footer(students)
-first_letter_filter(students)
-namelength(students)
-cohortfilter(students)
+try_load_students
+interactive_menu
+print_students	
+print_footer
+first_letter_filter
+namelength
+cohortfilter
 
 
 
