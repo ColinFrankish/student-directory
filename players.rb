@@ -22,7 +22,7 @@ def print_title
 end
 
 def print_team	
-			@players.each { |player| puts "Player #{player[:firstname]}" + " " + "#{player[:lastname]}" }
+			@players.each { |player| puts "Player: #{player[:firstname]}" + " " + "#{player[:lastname]}" }
 end	
 
 def number_of_players
@@ -37,7 +37,7 @@ def print_footer
 	
 
 print_title
-players = input_players
+input_players
 print_team
 number_of_players
 print_footer
