@@ -7,8 +7,8 @@ def input_students
 	puts "and optional details as prompted.".center(77)
 	print "name please: "; name = STDIN.gets.chomp
 	print "cohort month please: "; cohort = STDIN.gets.chomp
-  	print "country of birth please: "; birth = STDIN.gets.chomp
-  	print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
+  print "country of birth please: "; birth = STDIN.gets.chomp
+  print "favourite hobby (Opt.): "; hobby = STDIN.gets.chomp
 # While the name is not empty, repeat this code.
 
 	while  !name.empty?  do
@@ -97,6 +97,7 @@ def print_menu
 	puts "5. Filter students by cohort (default January)."
 	puts "6. Filter students by first letter of their name."
 	puts "7. Filter students by name length."
+  puts "8. Delete existing student."
 	puts "9. Exit." 
 end
 
@@ -122,6 +123,8 @@ def process(selection)
 	first_letter_filter
 	when "7"
 	namelength
+  when "8"
+  delete_student
 	when "9"
 	exit
 	else
@@ -167,16 +170,24 @@ def load_students(filename = "students.csv")
 	end
 	file.close
 end
+
+def delete_student
+  puts "Please enter the name of the student you wish to delete from the list."
+  student = gets.chomp
+  @students.delete_if { |x| x[:name] == student}
+  puts "STUDENT DELETED!"
+  save_students
+end
 # nothing happens till we call the methods
 #students = input_students
 print_header
-try_load_students
+load_students
 interactive_menu
-print_students	
-print_footer
-first_letter_filter
-namelength
-cohortfilter
+# print_students	
+# print_footer
+# first_letter_filter
+# namelength
+# cohortfilter
 
 
 

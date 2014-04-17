@@ -11,7 +11,7 @@ Added notes as directory menu now interactive and also to test out branching on 
 ruby directory.rb
 ```
 
-Also added a small five aside football team creatoer to recap some of the basics 
+Also added a small five aside football team creator to recap some of the basics 
 learnt in the student directory project, and refactored. 
 ```shell
 ruby players.rb
